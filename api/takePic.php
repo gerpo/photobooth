@@ -102,7 +102,7 @@ if (!isset($_POST['style'])) {
 switch ($_POST['style']) {
     case 'photo':
         takePicture($filename_tmp);
-
+        (new S3Upload())->multipartUpload($file);
         $LogData = [
             'success' => 'image',
             'file' => $file,
