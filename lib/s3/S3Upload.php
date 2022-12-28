@@ -2,7 +2,7 @@
 
 defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
-foreach (glob("./*.php") as $filename) {
+foreach (glob("./**/*.php") as $filename) {
     require_once $filename;
 }
 
