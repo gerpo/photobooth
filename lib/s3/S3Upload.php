@@ -1,5 +1,4 @@
 <?php
-namespace lib\s3;
 
 use Akeeba\Engine\Postproc\Connector\S3v4\Configuration;
 use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
