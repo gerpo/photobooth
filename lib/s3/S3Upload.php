@@ -21,6 +21,7 @@ class S3Upload
 
     public function __construct()
     {
+        define('AKEEBAENGINE', 1);
         $this->config = new Configuration("acces_id", "secret");
 
         $this->connector = new Connector($this->config);
