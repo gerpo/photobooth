@@ -5,7 +5,6 @@ header('Content-Type: application/json');
 require_once '../lib/config.php';
 require_once '../lib/db.php';
 require_once '../lib/log.php';
-require_once '../lib/s3/S3Upload.php';
 
 function takePicture($filename) {
     global $config;
