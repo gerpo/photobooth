@@ -1,4 +1,7 @@
 <?php
+
+use lib\s3\S3Upload;
+
 header('Content-Type: application/json');
 
 require_once '../lib/config.php';
