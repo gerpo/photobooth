@@ -3,11 +3,12 @@ require_once 'Configuration.php';
 require_once 'Connector.php';
 require_once 'Input.php';
 
+defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
+
 use Akeeba\Engine\Postproc\Connector\S3v4\Configuration;
 use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
 use Akeeba\Engine\Postproc\Connector\S3v4\Input;
 
-defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
 class S3Upload
 {
