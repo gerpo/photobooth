@@ -5,10 +5,6 @@ defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 foreach (glob("./*.php") as $filename) {
     require_once $filename;
 }
-#require_once 'Configuration.php';
-#require_once 'Connector.php';
-#require_once 'Input.php';
-
 
 use Akeeba\Engine\Postproc\Connector\S3v4\Configuration;
 use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
