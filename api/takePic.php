@@ -102,6 +102,11 @@ if (!isset($_POST['style'])) {
 switch ($_POST['style']) {
     case 'photo':
         takePicture($filename_tmp);
+        $LogData = [
+            'success' => 'image',
+            'file' => $file,
+            'php' => basename($_SERVER['PHP_SELF']),
+        ];
         break;
     case 'collage':
         if (!is_numeric($_POST['collageNumber'])) {
