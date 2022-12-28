@@ -103,6 +103,18 @@ function testFile($file) {
     return true;
 }
 
+function getAWSAccessKey() {
+    return getenv('AWS_UPLOAD_ACCESS_KEY');
+}
+
+function getAWSSecret() {
+    return getenv('AWS_UPLOAD_SECRET');
+}
+
+function getAWSBucket() {
+    return getenv('AWS_UPLOAD_BUCKET');
+}
+
 function getPhotoboothVersion() {
     $packageContent = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'package.json');
     $package = json_decode($packageContent, true);

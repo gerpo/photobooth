@@ -462,8 +462,8 @@ const photoBooth = (function () {
                         if (result.current + 1 < result.limit) {
                             $(
                                 '<a class="btn rotaryfocus" href="#" id="btnCollageNext">' +
-                                    photoboothTools.getTranslation('nextPhoto') +
-                                    '</a>'
+                                photoboothTools.getTranslation('nextPhoto') +
+                                '</a>'
                             )
                                 .appendTo('.loading')
                                 .click((ev) => {
@@ -480,8 +480,8 @@ const photoBooth = (function () {
                         } else {
                             $(
                                 '<a class="btn rotaryfocus" href="#" id="btnCollageProcess">' +
-                                    photoboothTools.getTranslation('processPhoto') +
-                                    '</a>'
+                                photoboothTools.getTranslation('processPhoto') +
+                                '</a>'
                             )
                                 .appendTo('.loading')
                                 .click((ev) => {
@@ -502,8 +502,8 @@ const photoBooth = (function () {
 
                         $(
                             '<a class="btn rotaryfocus" style="margin-left:2px" href="#">' +
-                                photoboothTools.getTranslation('retakePhoto') +
-                                '</a>'
+                            photoboothTools.getTranslation('retakePhoto') +
+                            '</a>'
                         )
                             .appendTo('.loading')
                             .click((ev) => {
@@ -536,6 +536,7 @@ const photoBooth = (function () {
                     currentCollageFile = '';
                     api.nextCollageNumber = 0;
 
+                    api.uploadToS3(result);
                     api.processPic(data.style, result);
                 }
             })
@@ -578,6 +579,30 @@ const photoBooth = (function () {
                 loading.append($('<a class="btn" href="./">').text(photoboothTools.getTranslation('reload')));
             }
         }, 500);
+    };
+
+    api.uploadToS3 = function (result) {
+        startTime = new Date().getTime();
+
+        $.ajax({
+            method: 'POST',
+            url: 'api/uploadToS3.php',
+            data: {
+                file: result.file,
+            },
+            success: (data) => {
+                photoboothTools.console.log(result.file + ' uploaded', data);
+                endTime = new Date().getTime();
+                totalTime = endTime - startTime;
+                photoboothTools.console.logDev('Uploading ' + result.file + ' took ' + totalTime + 'ms');
+
+            },
+            error: (jqXHR, textStatus) => {
+                api.errorPic({
+                    error: 'Request failed: ' + textStatus
+                });
+            }
+        });
     };
 
     api.processPic = function (photoStyle, result) {
@@ -928,8 +953,8 @@ const photoBooth = (function () {
                                 printMesg.empty();
                                 printMesg.html(
                                     '<div class="modal__body"><span>' +
-                                        photoboothTools.getTranslation('printing') +
-                                        '</span></div>'
+                                    photoboothTools.getTranslation('printing') +
+                                    '</span></div>'
                                 );
                             }
                             cb();
@@ -942,8 +967,8 @@ const photoBooth = (function () {
                         printMesg.empty();
                         printMesg.html(
                             '<div class="modal__body"><span style="color:red">' +
-                                photoboothTools.getTranslation('error') +
-                                '</span></div>'
+                            photoboothTools.getTranslation('error') +
+                            '</span></div>'
                         );
 
                         setTimeout(function () {
@@ -951,8 +976,8 @@ const photoBooth = (function () {
                             printMesg.empty();
                             printMesg.html(
                                 '<div class="modal__body"><span>' +
-                                    photoboothTools.getTranslation('printing') +
-                                    '</span></div>'
+                                photoboothTools.getTranslation('printing') +
+                                '</span></div>'
                             );
                             cb();
                             isPrinting = false;

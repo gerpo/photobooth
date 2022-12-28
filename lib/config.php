@@ -249,4 +249,10 @@ if (empty($config['qr']['url'])) {
     $config['qr']['url'] = getPhotoboothUrl() . '/api/download.php?image=';
 }
 
+if ($config['aws']['upload_files']) {
+    $config['aws']['access_key'] = getAWSAccessKey();
+    $config['aws']['secret'] = getAWSSecret();
+    $config['aws']['bucket'] = getAWSBucket();
+}
+
 $config['photobooth']['version'] = getPhotoboothVersion();
