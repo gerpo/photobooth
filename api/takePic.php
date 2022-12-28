@@ -103,11 +103,23 @@ switch ($_POST['style']) {
     case 'photo':
         takePicture($filename_tmp);
 
-        $LogData = [
-            'success' => 'image',
-            'file' => $file,
-            'php' => basename($_SERVER['PHP_SELF']),
-        ];
+        try {
+            (new S3Upload())->multipartUpload($file);
+            $LogData = [
+                'success' => 'image',
+                'file' => $file,
+                'php' => basename($_SERVER['PHP_SELF']),
+            ];
+        }
+        catch (\Excpetion $e){
+            $ErrorData = [
+                'error' => 'S3 upload did not work',
+                'exception' => $e->getMessage(),
+                'php' => basename($_SERVER['PHP_SELF']),
+            ];
+            $ErrorString = json_encode($ErrorData);
+            logError($ErrorData);
+        }
         break;
     case 'collage':
         if (!is_numeric($_POST['collageNumber'])) {
