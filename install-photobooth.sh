@@ -539,7 +539,7 @@ add_git_remote() {
         fi
     else
         info "### Adding photoboothproject remote..."
-        git remote add photoboothproject https://github.com/PhotoboothProject/photobooth.git
+        git remote add photoboothproject https://github.com/gerpo/photobooth.git
     fi
 }
 
@@ -588,7 +588,7 @@ start_git_install() {
 start_install() {
     info "### Now we are going to install Photobooth."
     if [ $GIT_INSTALL = true ]; then
-        git clone https://github.com/PhotoboothProject/photobooth $INSTALLFOLDER
+        git clone https://github.com/gerpo/photobooth $INSTALLFOLDER
         cd $INSTALLFOLDERPATH
         add_git_remote
         start_git_install

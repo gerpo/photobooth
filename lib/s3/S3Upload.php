@@ -22,7 +22,7 @@ class S3Upload
 
     public function __construct()
     {
-        $this->config = new Configuration("AKIAZHTYZVTA4ZDZITQF", "uJv5v8XH2FeBdZCHjdvG5OmCuuVOU+ST9VSlDanl");
+        $this->config = new Configuration("acces_id", "secret");
 
         $this->connector = new Connector($this->config);
     }
