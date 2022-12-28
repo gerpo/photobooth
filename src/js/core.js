@@ -581,7 +581,7 @@ const photoBooth = (function () {
         }, 500);
     };
 
-    api.uploadToS3 = function (result) {
+    api.uploadToS3 = async function (result) {
         startTime = new Date().getTime();
 
         $.ajax({
