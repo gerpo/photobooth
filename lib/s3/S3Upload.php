@@ -5,8 +5,8 @@ use Akeeba\Engine\Postproc\Connector\S3v4\Configuration;
 use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
 use Akeeba\Engine\Postproc\Connector\S3v4\Input;
 
-require_once '../lib/config.php';
-require_once '../lib/helper.php';
+require_once '../config.php';
+require_once '../helper.php';
 
 
 class S3Upload
@@ -22,7 +22,7 @@ class S3Upload
 
     public function __construct()
     {
-        $this->config = new Configuration();
+        $this->config = new Configuration("AKIAZHTYZVTA4ZDZITQF", "uJv5v8XH2FeBdZCHjdvG5OmCuuVOU+ST9VSlDanl");
 
         $this->connector = new Connector($this->config);
     }
