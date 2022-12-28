@@ -64,11 +64,11 @@ function takePicture($filename) {
                 'output' => $output,
                 'php' => basename($_SERVER['PHP_SELF']),
             ];
+            $ErrorString = json_encode($ErrorData);
             logError($ErrorData);
             die($ErrorString);
         }
-    }            $ErrorString = json_encode($ErrorData);
-
+    }
 }
 
 $random = md5(microtime()) . '.jpg';
@@ -102,6 +102,7 @@ if (!isset($_POST['style'])) {
 switch ($_POST['style']) {
     case 'photo':
         takePicture($filename_tmp);
+
         $LogData = [
             'success' => 'image',
             'file' => $file,
