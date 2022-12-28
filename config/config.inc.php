@@ -425,3 +425,6 @@ $config['folders']['private'] = 'private';
 $config['reset']['remove_images'] = true;
 $config['reset']['remove_mailtxt'] = false;
 $config['reset']['remove_config'] = false;
+
+// A W S
+$config['aws']['upload_files'] = true;
