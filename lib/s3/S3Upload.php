@@ -4,9 +4,6 @@ use Akeeba\Engine\Postproc\Connector\S3v4\Configuration;
 use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
 use Akeeba\Engine\Postproc\Connector\S3v4\Input;
 
-require_once '../config.php';
-require_once '../helper.php';
-
 
 class S3Upload
 {
