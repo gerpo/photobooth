@@ -2617,6 +2617,15 @@ $configsetup = [
             'value' => 'reset-btn',
         ],
     ],
+    'aws' => [
+        'view' => 'basic',
+        'upload_files' => [
+            'view' => 'basic',
+            'type' => 'checkbox',
+            'name' => 'aws[upload_files]',
+            'value' => $config['aws']['upload_files'],
+        ],
+    ],
     'version' => [
         'view' => 'basic',
         'check_version' => [
