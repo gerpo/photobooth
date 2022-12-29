@@ -19,6 +19,7 @@ function uploadToS3(string $file)
             'error' => 'AWS environment variables not probably set.',
             'access_key' => $config['aws']['access_key'],
             'bucket' => $config['aws']['bucket'],
+            'config' => $config,
             'php' => basename($_SERVER['PHP_SELF']),
         ];
         $ErrorString = json_encode($ErrorData);
