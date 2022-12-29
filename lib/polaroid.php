@@ -12,14 +12,14 @@
  */
 function effectPolaroid($resource, $rotation, $rbcc, $gbcc, $bbcc) {
     // We create a new image
-    $img = imagecreatetruecolor(imagesx($resource) + 25, imagesy($resource) + 80);
+    $img = imagecreatetruecolor(imagesx($resource) + 50, imagesy($resource) + 180);
     $white = imagecolorallocate($img, 255, 255, 255);
 
     // We fill in the new white image
     imagefill($img, 0, 0, $white);
 
     // We copy the image to which we want to apply the polariod effect in our new image.
-    imagecopy($img, $resource, 11, 11, 0, 0, imagesx($resource), imagesy($resource));
+    imagecopy($img, $resource, 25, 25, 0, 0, imagesx($resource), imagesy($resource));
 
     // Clear cach
     imagedestroy($resource);
