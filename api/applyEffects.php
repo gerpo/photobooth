@@ -10,6 +10,7 @@ require_once '../lib/collage.php';
 require_once '../lib/applyText.php';
 require_once '../lib/applyEffects.php';
 require_once '../lib/log.php';
+require_once '../lib/frameAndText.php';
 
 if (!extension_loaded('gd')) {
     $errormsg = basename($_SERVER['PHP_SELF']).': GD library not loaded! Please enable GD!';
