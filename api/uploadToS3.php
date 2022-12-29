@@ -6,6 +6,10 @@ require_once '../lib/config.php';
 require_once '../lib/log.php';
 require_once '../lib/s3/S3Upload.php';
 
+if (!$config['aws']['upload_files']) {
+    return json_encode(['message' => 'No upload desired']);
+}
+
 if (empty($_POST['file'])) {
     $errormsg = basename($_SERVER['PHP_SELF']).': No file provided';
     logErrorAndDie($errormsg);
@@ -28,9 +32,6 @@ function uploadToS3(string $file)
     $filename_tmp = $config['foldersAbs']['tmp'].DIRECTORY_SEPARATOR.$file;
     $filename_finished = $config['foldersAbs']['images'].DIRECTORY_SEPARATOR.$file;
 
-    if (!$config['aws']['upload_files']) {
-        return json_encode(['message' => 'No upload desired']);
-    }
 
     if (!file_exists($filename_tmp)) {
         $errormsg = basename($_SERVER['PHP_SELF']).': File '.$filename_tmp.' does not exist';
