@@ -35,7 +35,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     $xOffsetLine1 = ($right - $left) / 2;
     $yOffsetLine1 = ($bottom - $top) / 2;
 
-    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine1, imagesy($img) - 120 + $yOffsetLine1 + 5,
+    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine1, imagesy($img) - 120 + $yOffsetLine1,
         $black, $fontPath, $text);
 
     // Add Text 2nd line
