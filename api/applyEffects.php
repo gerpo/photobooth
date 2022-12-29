@@ -30,7 +30,7 @@ function copyAndResize(string $file)
 
     copy($file_tmp, $file_original);
 
-    $sizeReduction = 0.5;
+    $sizeReduction = 0.3;
     list($width, $height) = getimagesize($file_tmp);
     $newwidth = $width * $sizeReduction;
     $newheight = $height * $sizeReduction;
