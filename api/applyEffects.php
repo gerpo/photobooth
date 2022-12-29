@@ -21,22 +21,27 @@ if (empty($_POST['file'])) {
     logErrorAndDie($errormsg);
 }
 
-function copyAndResize(string $filename_tmp)
+function copyAndResize(string $file)
 {
+    $file_tmp = $config['foldersAbs']['tmp'].DIRECTORY_SEPARATOR.$file;
+    $file_original = $config['foldersAbs']['original'].DIRECTORY_SEPARATOR.$file;
+
+    copy($file_tmp, $file_original);
+
     $sizeReduction = 0.5;
-    list($width, $height) = getimagesize($filename_tmp);
+    list($width, $height) = getimagesize($file_tmp);
     $newwidth = $width * $sizeReduction;
     $newheight = $height * $sizeReduction;
 
     //Load
     $thumb = imagecreatetruecolor($newwidth, $newheight);
-    $source = imagecreatefromjpeg($filename_tmp);
+    $source = imagecreatefromjpeg($file_tmp);
 
     //Resize
     imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
     //Output
-    imagejpeg($thumb, $filename_tmp);
+    imagejpeg($thumb, $file_tmp);
 }
 
 $file = $_POST['file'];
@@ -95,6 +100,9 @@ foreach ($srcImages as $image) {
         $errormsg = basename($_SERVER['PHP_SELF']).': File '.$filename_tmp.' does not exist';
         logErrorAndDie($errormsg);
     }
+
+    copyAndResize($file);
+
     $execTimes[] = microtime(true) - $startTime;
     $imageResource = imagecreatefromjpeg($filename_tmp);
     $execTimes[] = microtime(true) - $startTime;
