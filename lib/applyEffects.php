@@ -42,7 +42,8 @@ function editSingleImage($config, $imageResource, $image_filter, $editSingleColl
 
     if ($config['picture']['polaroid_effect'] && !$isCollage) {
         $polaroid_rotation = $config['picture']['polaroid_rotation'];
-        $imageResource = effectPolaroid($imageResource, $polaroid_rotation, 200, 200, 200);
+        #$imageResource = effectPolaroid($imageResource, $polaroid_rotation, 200, 200, 200);
+        $imageResource = frameAndText($imageResource, $polaroid_rotation, 200, 200, 200);
         $imageModified = true;
     }
 
