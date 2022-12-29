@@ -54,11 +54,12 @@ function uploadToS3(string $file)
 
     try {
         (new S3Upload())->multipartUpload($filename_tmp, 'tmp');
-
+        file_put_contents($config['foldersAbs']['qrcodes'] . DIRECTORY_SEPARATOR . 'tmp_'. basename($file, '.jpg'));
         if (!file_exists($filename_finished)) {
             return;
         }
         (new S3Upload())->multipartUpload($filename_finished, 'images');
+        file_put_contents($config['foldersAbs']['qrcodes'] . DIRECTORY_SEPARATOR . 'images_'. basename($file, '.jpg'));
     } catch (\Exception $e) {
         $ErrorData = [
             'error' => 'AWS S3 upload not successful.',
