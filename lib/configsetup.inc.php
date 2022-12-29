@@ -2567,6 +2567,13 @@ $configsetup = [
             'name' => 'folders[tmp]',
             'value' => $config['folders']['tmp'],
         ],
+        'folders_original' => [
+            'view' => 'expert',
+            'type' => 'input',
+            'placeholder' => $defaultConfig['folders']['original'],
+            'name' => 'folders[original]',
+            'value' => $config['folders']['original'],
+        ],
         'folders_archives' => [
             'view' => 'expert',
             'type' => 'input',

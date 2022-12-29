@@ -418,6 +418,7 @@ $config['folders']['print'] = 'print';
 $config['folders']['qrcodes'] = 'qrcodes';
 $config['folders']['thumbs'] = 'thumbs';
 $config['folders']['tmp'] = 'tmp';
+$config['folders']['original'] = 'original';
 $config['folders']['archives'] = 'archives';
 $config['folders']['private'] = 'private';
 

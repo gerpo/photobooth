@@ -21,6 +21,24 @@ if (empty($_POST['file'])) {
     logErrorAndDie($errormsg);
 }
 
+function copyAndResize(string $filename_tmp)
+{
+    $sizeReduction = 0.5;
+    list($width, $height) = getimagesize($filename_tmp);
+    $newwidth = $width * $sizeReduction;
+    $newheight = $height * $sizeReduction;
+
+    //Load
+    $thumb = imagecreatetruecolor($newwidth, $newheight);
+    $source = imagecreatefromjpeg($filename_tmp);
+
+    //Resize
+    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+    //Output
+    imagejpeg($thumb, $filename_tmp);
+}
+
 $file = $_POST['file'];
 
 $quality = 100;
