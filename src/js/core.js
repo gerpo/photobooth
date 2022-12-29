@@ -536,7 +536,9 @@ const photoBooth = (function () {
                     currentCollageFile = '';
                     api.nextCollageNumber = 0;
 
-                    api.uploadToS3(result);
+                    api.uploadToS3(result).then(function () {
+                        console.log('Uploaded');
+                    });
                     api.processPic(data.style, result);
                 }
             })
