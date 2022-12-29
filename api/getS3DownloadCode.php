@@ -27,4 +27,4 @@ switch ($config['qr']['ecLevel']) {
         break;
 }
 
-QRcode::png($url, false, $ecLevel, 8);
+QRcode::png($url, false, $ecLevel, 4);
