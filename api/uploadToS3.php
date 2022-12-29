@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 
 require_once '../lib/config.php';
 require_once '../lib/log.php';
+require_once '../lib/s3/S3Upload.php';
 
 if (empty($_POST['file'])) {
     $errormsg = basename($_SERVER['PHP_SELF']) . ': No file provided';
