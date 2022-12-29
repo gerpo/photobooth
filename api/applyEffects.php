@@ -79,7 +79,7 @@ foreach ($srcImages as $image) {
     }
     $execTimes[] = microtime(true) - $startTime;
     $imageResource = imagecreatefromjpeg($filename_tmp);
-
+    $execTimes[] = microtime(true) - $startTime;
     if ($_POST['style'] === 'collage' && $file != $image) {
         $editSingleCollage = true;
         $picture_frame = $config['collage']['frame'];
