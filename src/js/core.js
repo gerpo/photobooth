@@ -791,7 +791,7 @@ const photoBooth = (function () {
             }
         };
 
-        $('#s3QRCodeImage').attr('src', `/api/getS§DownloadCode?filename=${filename}`);
+        $('#s3QRCodeImage').attr('src', `/api/getS3DownloadCode?filename=${filename}`);
 
         preloadImage.src = imageUrl;
 
