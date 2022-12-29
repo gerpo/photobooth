@@ -5,7 +5,7 @@ require_once '../lib/s3/S3Upload.php';
 
 $filename = $_GET['filename'];
 
-$url = (new S3Upload())->getPresignedURL($filename);
+$url = (new S3Upload())->getPresignedURL("images/{$filename}");
 
 include '../vendor/phpqrcode/lib/full/qrlib.php';
 

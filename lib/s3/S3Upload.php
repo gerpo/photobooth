@@ -46,12 +46,12 @@ class S3Upload
         $this->connector = new Connector($this->config);
     }
 
-    public function getPresignedURL(string $path) : string
+    public function getPresignedURL(string $path): string
     {
         return $this->connector->getAuthenticatedURL($this->global['aws']['bucket'], $path, 60 * 60);
     }
 
-    public function multipartUpload($sourceFile)
+    public function multipartUpload($sourceFile, $suffix = '')
     {
         $input = Input::createFromFile($sourceFile);
         $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], basename($sourceFile));
@@ -65,15 +65,15 @@ class S3Upload
             $input = Input::createFromFile($sourceFile);
             $input->setUploadID($uploadId);
             $input->setPartNumber(++$partNumber);
-
-            $eTag = $this->connector->uploadMultipart($input, $this->global['aws']['bucket'], basename($sourceFile));
+            $basename = basename($sourceFile);
+            $eTag = $this->connector->uploadMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
 
             if (!is_null($eTag)) {
                 $eTags[] = $eTag;
             }
         } while (!is_null($eTag));
 
-// IMPORTANT: You MUST create the input afresh before finalising the multipart upload
+        // IMPORTANT: You MUST create the input afresh before finalising the multipart upload
         $input = Input::createFromFile($sourceFile);
         $input->setUploadID($uploadId);
         $input->setEtags($eTags);

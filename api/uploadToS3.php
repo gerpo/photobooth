@@ -53,12 +53,12 @@ function uploadToS3(string $file)
     }
 
     try {
-        (new S3Upload())->multipartUpload($filename_tmp);
+        (new S3Upload())->multipartUpload($filename_tmp, 'tmp');
 
         if (!file_exists($filename_finished)) {
             return;
         }
-        (new S3Upload())->multipartUpload($filename_finished);
+        (new S3Upload())->multipartUpload($filename_finished, 'images');
     } catch (\Exception $e) {
         $ErrorData = [
             'error' => 'AWS S3 upload not successful.',
