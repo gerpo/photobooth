@@ -28,8 +28,14 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     // Add Text
     $black = imagecolorallocate($img, 0, 0, 0);
     $fontPath = '../resources/fonts/Richardson.otf';
+    $text = "Happy New Year";
+    $fontSize = 52
 
-    imagefttext($img, 42, 0, (imagesx($img) / 2) - 10, imagesy($img) - 110, $black, $fontPath, "Happy New Year");
+    list($left, $bottom, $right, , , $top) = imageftbbox($fontSize, 0, $fontPath, $text);
+    $xOffset = ($right - $left) / 2;
+    $yOffset = ($bottom - $top) / 2;
+
+    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffset, imagesy($img) -120 + $yOffset + 5, $black, $fontPath, $text);
 
 
     // We destroy the image we have been working with
