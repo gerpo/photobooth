@@ -2,8 +2,6 @@
 
 defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
-require_once(realpath('..'.DIRECTORY_SEPARATOR.'config.php'));
-
 foreach (glob("./**/*.php") as $filename) {
     require_once $filename;
 }
