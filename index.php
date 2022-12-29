@@ -179,6 +179,12 @@ if (
                 <div class="modal__body <?php echo $uiShape; ?>"></div>
             </div>
         <?php endif; ?>
+
+        <?php if ($config['aws']['upload_files']): ?>
+            <div id="s3DownloadCode" class="" style='position: sticky; top:0; left:0'>
+                <img id="s3QRCodeImage" src='' alt=''>
+            </div>
+        <?php endif; ?>
     </div>
 
     <?php if ($config['gallery']['enabled']): ?>
