@@ -15,13 +15,18 @@ function uploadToS3(string $file)
 {
     global $config;
 
+    $filename_tmp = $config['foldersAbs']['tmp'] . DIRECTORY_SEPARATOR . $file;
+
+    if (!file_exists($filename_tmp)) {
+        $errormsg = basename($_SERVER['PHP_SELF']) . ': File ' . $filename_tmp . ' does not exist';
+        logErrorAndDie($errormsg);
+    }
+
     if ($config['aws']['upload_files'] && (empty($config['aws']['access_key']) || empty($config['aws']['secret']) || empty($config['aws']['bucket']))) {
         $ErrorData = [
             'error' => 'AWS environment variables not probably set.',
             'access_key' => $config['aws']['access_key'],
             'bucket' => $config['aws']['bucket'],
-            'secret' => getenv('AWS_UPLOAD_ACCESS_KEY'),
-            'config' => $config,
             'php' => basename($_SERVER['PHP_SELF']),
         ];
         $ErrorString = json_encode($ErrorData);
@@ -30,11 +35,12 @@ function uploadToS3(string $file)
     }
 
     try {
-        (new S3Upload())->multipartUpload($file);
+        (new S3Upload())->multipartUpload($filename_tmp);
     } catch (\Exception $e) {
         $ErrorData = [
             'error' => 'AWS S3 upload not successful.',
             'file' => $file,
+            'filename_tmp' => $filename_tmp,
             'exception' => $e->getMessage(),
             'php' => basename($_SERVER['PHP_SELF']),
         ];
