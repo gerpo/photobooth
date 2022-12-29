@@ -11,6 +11,11 @@ if (empty($_POST['file'])) {
     logErrorAndDie($errormsg);
 }
 
+if (!function_exists('curl_init')) {
+    $errormsg = basename($_SERVER['PHP_SELF']) . ': Curl library not loaded! Please enable curl!';
+    logErrorAndDie($errormsg);
+}
+
 function uploadToS3(string $file)
 {
     global $config;
