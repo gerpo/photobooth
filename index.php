@@ -182,7 +182,8 @@ if (
 
         <?php if ($config['aws']['upload_files']): ?>
             <div id="s3DownloadCode" class="" style='position: fixed; bottom:20px; right:20px;'>
-                <img id="s3QRCodeImage" src='' alt=''>
+                <img id="s3QRCodeImage" src='' alt='s3 download code' height='100px' width='100px'>
+                <p>Download</p>
             </div>
         <?php endif; ?>
     </div>
