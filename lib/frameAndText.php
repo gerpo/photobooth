@@ -3,14 +3,15 @@
 /**
  * Function to apply the polaroid effect to an image.
  *
- * @param string $resource Image resource
- * @param float $rotation Image rotation angle
- * @param int $rbcc red background color component
- * @param int $gbcc green background color component
- * @param int $bbcc blue background color component
+ * @param  string  $resource  Image resource
+ * @param  float  $rotation  Image rotation angle
+ * @param  int  $rbcc  red background color component
+ * @param  int  $gbcc  green background color component
+ * @param  int  $bbcc  blue background color component
  * @return resource image with the polaroid effect applied
  */
-function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc) {
+function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
+{
     // We create a new image
     $img = imagecreatetruecolor(imagesx($resource) + 50, imagesy($resource) + 74);
     $white = imagecolorallocate($img, 255, 255, 255);
@@ -19,7 +20,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc) {
     imagefill($img, 0, 0, $white);
 
     // We copy the image to which we want to apply the polariod effect in our new image.
-    imagecopy($img, $resource, 25, 25, 0, 0, imagesx($resource) - 50, imagesy($resource));
+    imagecopy($img, $resource, 25, 25, 0, 0, imagesx($resource), imagesy($resource) - 80);
 
     // Clear cach
     imagedestroy($resource);
