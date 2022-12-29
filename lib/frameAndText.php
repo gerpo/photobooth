@@ -35,7 +35,8 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     $xOffsetLine1 = ($right - $left) / 2;
     $yOffsetLine1 = ($bottom - $top) / 2;
 
-    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine1, imagesy($img) -120 + $yOffsetLine1 + 5, $black, $fontPath, $text);
+    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine1, imagesy($img) - 120 + $yOffsetLine1 + 5,
+        $black, $fontPath, $text);
 
     // Add Text 2nd line
     $fontPath = '../resources/fonts/Richardson.otf';
@@ -46,7 +47,8 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     $xOffsetLine2 = ($right - $left) / 2;
     $yOffsetLine2 = ($bottom - $top) / 2;
 
-    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine2, imagesy($img) - 120 + $yOffsetLine1 + $yOffsetLine2 + 5, $black, $fontPath, $text);
+    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffsetLine2,
+        imagesy($img) - 120 + $yOffsetLine1 * 1.5 + $yOffsetLine2 * 1.5 + 5, $black, $fontPath, $text);
 
     // We destroy the image we have been working with
     #imagedestroy($img);
