@@ -4,7 +4,7 @@ defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
 #require_once('./../config.php');
 
-foreach (glob("./lib/s3/**/*.php") as $filename) {
+foreach (glob("/var/www/html/lib/s3/**/*.php") as $filename) {
     require_once $filename;
 }
 
