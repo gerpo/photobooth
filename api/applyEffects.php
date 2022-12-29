@@ -49,11 +49,11 @@ function copyAndResize(string $file)
 
     if ($newAspectRatio > $sourceAspectRatio) {
         // The new image has a wider aspect ratio than the source image, so we need to adjust the height
-        $newImageHeight = $newWidth / $sourceAspectRatio;
+        $newImageHeight = $newWidth / $newAspectRatio;
         $newImageWidth = $newWidth;
     } else {
         // The new image has a taller or equal aspect ratio to the source image, so we need to adjust the width
-        $newImageWidth = $newHeight * $sourceAspectRatio;
+        $newImageWidth = $newHeight * $newAspectRatio;
         $newImageHeight = $newHeight;
     }
 
