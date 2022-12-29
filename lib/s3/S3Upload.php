@@ -41,7 +41,6 @@ class S3Upload
     {
         $this->global = $GLOBALS['config'];
         $this->config = new Configuration($this->global['aws']['access_key'], $this->global['aws']['secret'], 'v4', 'eu-central-1');
-        #$this->config->setSignatureMethod('v4');
 
         $this->connector = new Connector($this->config);
     }
