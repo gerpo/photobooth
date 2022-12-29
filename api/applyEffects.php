@@ -12,12 +12,12 @@ require_once '../lib/applyEffects.php';
 require_once '../lib/log.php';
 
 if (!extension_loaded('gd')) {
-    $errormsg = basename($_SERVER['PHP_SELF']) . ': GD library not loaded! Please enable GD!';
+    $errormsg = basename($_SERVER['PHP_SELF']).': GD library not loaded! Please enable GD!';
     logErrorAndDie($errormsg);
 }
 
 if (empty($_POST['file'])) {
-    $errormsg = basename($_SERVER['PHP_SELF']) . ': No file provided';
+    $errormsg = basename($_SERVER['PHP_SELF']).': No file provided';
     logErrorAndDie($errormsg);
 }
 
@@ -28,7 +28,7 @@ $imageModified = false;
 $image_filter = false;
 
 if (!isset($_POST['style'])) {
-    $errormsg = basename($_SERVER['PHP_SELF']) . ': No style provided';
+    $errormsg = basename($_SERVER['PHP_SELF']).': No style provided';
     logErrorAndDie($errormsg);
 }
 
@@ -51,31 +51,33 @@ if ($_POST['style'] === 'collage') {
     }
 }
 
+$startTime = microtime(true);
+$execTimes = [];
 $srcImages = [];
 $srcImages[] = $file;
 
-$filename_tmp = $config['foldersAbs']['tmp'] . DIRECTORY_SEPARATOR . $file;
+$filename_tmp = $config['foldersAbs']['tmp'].DIRECTORY_SEPARATOR.$file;
 
 if ($_POST['style'] === 'collage') {
     list($collageSrcImagePaths, $srcImages) = getCollageFiles($config['collage'], $filename_tmp, $file, $srcImages);
 
     if (!createCollage($collageSrcImagePaths, $filename_tmp, $image_filter)) {
-        $errormsg = basename($_SERVER['PHP_SELF']) . ': Could not create collage';
+        $errormsg = basename($_SERVER['PHP_SELF']).': Could not create collage';
         logErrorAndDie($errormsg);
     }
 }
 
 foreach ($srcImages as $image) {
-    $filename_photo = $config['foldersAbs']['images'] . DIRECTORY_SEPARATOR . $image;
-    $filename_keying = $config['foldersAbs']['keying'] . DIRECTORY_SEPARATOR . $image;
-    $filename_tmp = $config['foldersAbs']['tmp'] . DIRECTORY_SEPARATOR . $image;
-    $filename_thumb = $config['foldersAbs']['thumbs'] . DIRECTORY_SEPARATOR . $image;
+    $filename_photo = $config['foldersAbs']['images'].DIRECTORY_SEPARATOR.$image;
+    $filename_keying = $config['foldersAbs']['keying'].DIRECTORY_SEPARATOR.$image;
+    $filename_tmp = $config['foldersAbs']['tmp'].DIRECTORY_SEPARATOR.$image;
+    $filename_thumb = $config['foldersAbs']['thumbs'].DIRECTORY_SEPARATOR.$image;
 
     if (!file_exists($filename_tmp)) {
-        $errormsg = basename($_SERVER['PHP_SELF']) . ': File ' . $filename_tmp . ' does not exist';
+        $errormsg = basename($_SERVER['PHP_SELF']).': File '.$filename_tmp.' does not exist';
         logErrorAndDie($errormsg);
     }
-
+    $execTimes[] = microtime(true) - $startTime;
     $imageResource = imagecreatefromjpeg($filename_tmp);
 
     if ($_POST['style'] === 'collage' && $file != $image) {
@@ -87,9 +89,10 @@ foreach ($srcImages as $image) {
     }
 
     if ($_POST['style'] !== 'collage' || $editSingleCollage) {
-        list($imageResource, $imageModified) = editSingleImage($config, $imageResource, $image_filter, $editSingleCollage, $picture_frame, $_POST['style'] == 'collage');
+        list($imageResource, $imageModified) = editSingleImage($config, $imageResource, $image_filter,
+            $editSingleCollage, $picture_frame, $_POST['style'] == 'collage');
     }
-
+    $execTimes[] = microtime(true) - $startTime;
     if ($config['keying']['enabled'] || $_POST['style'] === 'chroma') {
         $chroma_size = substr($config['keying']['size'], 0, -2);
         $chromaCopyResource = resizeImage($imageResource, $chroma_size, $chroma_size);
@@ -98,17 +101,18 @@ foreach ($srcImages as $image) {
     }
 
     $configText = $config['textonpicture'];
-    list($imageResource, $imageModified) = addTextToImage($configText, $imageResource, $imageModified, $_POST['style'] == 'collage');
-
+    list($imageResource, $imageModified) = addTextToImage($configText, $imageResource, $imageModified,
+        $_POST['style'] == 'collage');
+    $execTimes[] = microtime(true) - $startTime;
     // image scale, create thumbnail
     $thumb_size = substr($config['picture']['thumb_size'], 0, -2);
     $thumbResource = resizeImage($imageResource, $thumb_size, $thumb_size);
 
     imagejpeg($thumbResource, $filename_thumb, $config['jpeg_quality']['thumb']);
     imagedestroy($thumbResource);
-
+    $execTimes[] = microtime(true) - $startTime;
     compressImage($config, $imageModified, $imageResource, $filename_tmp, $filename_photo);
-
+    $execTimes[] = microtime(true) - $startTime;
     if (!$config['picture']['keep_original']) {
         unlink($filename_tmp);
     }

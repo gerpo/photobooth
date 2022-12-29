@@ -767,7 +767,7 @@ const photoBooth = (function () {
 
         api.addImage(filename);
 
-        const imageUrl = config.foldersJS.thumbs + '/' + filename;
+        const imageUrl = config.foldersJS.images + '/' + filename;
 
         const preloadImage = new Image();
         preloadImage.onload = () => {
