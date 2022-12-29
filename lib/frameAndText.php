@@ -20,7 +20,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     imagefill($img, 0, 0, $white);
 
     // We copy the image to which we want to apply the polariod effect in our new image.
-    imagecopy($img, $resource, 25, 25, 0, 0, imagesx($resource), imagesy($resource) - 80);
+    imagecopy($img, $resource, 25, 25, 0, 0, imagesx($resource), imagesy($resource) - 100);
 
     // Clear cach
     imagedestroy($resource);
@@ -43,13 +43,16 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     imageline($img, imagesx($img) - 2, 4, imagesx($img) - 2, imagesy($img) - 4, $gris2);
     imageline($img, imagesx($img) - 1, 6, imagesx($img) - 1, imagesy($img) - 4, $gris3);
 
-    // We rotate the image
-    $background = imagecolorallocate($img, $rbcc, $gbcc, $bbcc);
-    $rotatedImg = imagerotate($img, $rotation, $background);
+    // Add Text
+    $black = imagecolorallocate($img, 0, 0, 0);
+    $fontPath = '../resources/fonts/Richardson Script Demo.otf';
+
+    imagefttext($img, 36, 0, imagesx($img)-10, imagesy($img)-80, $black, $fontPath, "Happy New Year");
+
 
     // We destroy the image we have been working with
-    imagedestroy($img);
+    #imagedestroy($img);
 
     // We return the rotated image
-    return $rotatedImg;
+    return $img;
 }
