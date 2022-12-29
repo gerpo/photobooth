@@ -45,7 +45,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
 
     // Add Text
     $black = imagecolorallocate($img, 0, 0, 0);
-    $fontPath = '../resources/fonts/Richardson Script Demo.otf';
+    $fontPath = '/resources/fonts/Richardson Script DEMO.otf';
 
     imagefttext($img, 36, 0, imagesx($img)-10, imagesy($img)-80, $black, $fontPath, "Happy New Year");
 
