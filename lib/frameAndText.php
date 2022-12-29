@@ -39,7 +39,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
         $black, $fontPath, $text);
 
     // Add Text 2nd line
-    $fontPath = '../resources/fonts/Richardson.otf';
+    $fontPath = '../resources/fonts/ZenKakuGothicAntique-Regular.ttf';
     $text = "31.12.2022";
     $fontSize = 48;
 
