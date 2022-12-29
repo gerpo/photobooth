@@ -23,6 +23,8 @@ if (empty($_POST['file'])) {
 
 function copyAndResize(string $file)
 {
+    global $config;
+
     $file_tmp = $config['foldersAbs']['tmp'].DIRECTORY_SEPARATOR.$file;
     $file_original = $config['foldersAbs']['original'].DIRECTORY_SEPARATOR.$file;
 
