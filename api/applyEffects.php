@@ -32,18 +32,42 @@ function copyAndResize(string $file)
 
     $sizeReduction = 0.3;
     list($width, $height) = getimagesize($file_tmp);
-    $newwidth = $width * $sizeReduction;
-    $newheight = $height * $sizeReduction;
+    $newWidth = $width * $sizeReduction;
+    $newHeight = $height * $sizeReduction;
 
     //Load
-    $thumb = imagecreatetruecolor($newwidth, $newheight);
+    $tmp = imagecreatetruecolor($newWidth, $newHeight);
     $source = imagecreatefromjpeg($file_tmp);
 
     //Resize
-    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    imagecopyresized($tmp, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+    $sourceAspectRatio = $newWidth / $newHeight;
+
+    // Calculate the aspect ratio of the new image
+    $newAspectRatio = 148 / 100;
+
+    if ($newAspectRatio > $sourceAspectRatio) {
+        // The new image has a wider aspect ratio than the source image, so we need to adjust the height
+        $newImageHeight = $newWidth / $sourceAspectRatio;
+        $newImageWidth = $newWidth;
+    } else {
+        // The new image has a taller or equal aspect ratio to the source image, so we need to adjust the width
+        $newImageWidth = $newHeight * $sourceAspectRatio;
+        $newImageHeight = $newHeight;
+    }
+
+    $tmp_cropped = imagecreatetruecolor($newImageWidth, $newImageHeight);
+    $x = ($newWidth - $newImageWidth) / 2;
+    $y = ($newHeight - $newImageHeight) / 2;
+    imagecopyresampled($tmp_cropped, $tmp, 0, 0, $x, $y, $newImageWidth, $newImageHeight, $newImageWidth,
+        $newImageHeight);
 
     //Output
-    imagejpeg($thumb, $file_tmp);
+    imagejpeg($tmp_cropped, $file_tmp);
+    imagedestroy($source);
+    imagedestroy($tmp);
+    imagedestroy($tmp_cropped);
 }
 
 $file = $_POST['file'];
