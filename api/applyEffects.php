@@ -139,6 +139,7 @@ if ($_POST['style'] === 'chroma' && $config['live_keying']['show_all'] === false
 $LogData = [
     'file' => $file,
     'images' => $srcImages,
+    'exec_times' => $execTimes,
     'php' => basename($_SERVER['PHP_SELF']),
 ];
 $LogString = json_encode($LogData);
