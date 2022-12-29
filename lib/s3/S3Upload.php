@@ -4,7 +4,11 @@ defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
 require_once '../config.php';
 
-foreach (glob("./**/*.php") as $filename) {
+foreach (glob("./*.php") as $filename) {
+    require_once $filename;
+}
+
+foreach (glob("./(Exception|Response|Signature)/*.php") as $filename) {
     require_once $filename;
 }
 
