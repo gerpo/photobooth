@@ -25,7 +25,7 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
     // Clear cach
     imagedestroy($resource);
 
-    // Add Text
+    // Add Text 1st line
     $black = imagecolorallocate($img, 0, 0, 0);
     $fontPath = '../resources/fonts/Richardson.otf';
     $text = "Happy New Year";
@@ -37,6 +37,16 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
 
     imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffset, imagesy($img) -120 + $yOffset + 5, $black, $fontPath, $text);
 
+    // Add Text 2nd line
+    $fontPath = '../resources/fonts/Richardson.otf';
+    $text = "31.12.2022";
+    $fontSize = 48;
+
+    list($left, $bottom, $right, , , $top) = imageftbbox($fontSize, 0, $fontPath, $text);
+    $xOffset = ($right - $left) / 2;
+    $yOffset = ($bottom - $top) / 2;
+
+    imagefttext($img, $fontSize, 0, (imagesx($img) / 2) - $xOffset, imagesy($img) -120 + $yOffset + 5, $black, $fontPath, $text);
 
     // We destroy the image we have been working with
     #imagedestroy($img);

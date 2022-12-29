@@ -6,6 +6,8 @@ require_once '../lib/config.php';
 require_once '../lib/log.php';
 require_once '../lib/s3/S3Upload.php';
 
+set_time_limit(0);
+
 if (!$config['aws']['upload_files']) {
     die(json_encode(['message' => 'No upload desired']));
 }
