@@ -40,9 +40,15 @@ class S3Upload
     public function __construct()
     {
         $this->global = $GLOBALS['config'];
-        $this->config = new Configuration($this->global['aws']['access_key'], $this->global['aws']['secret'], 'v4', 'eu-central-1');
+        $this->config = new Configuration($this->global['aws']['access_key'], $this->global['aws']['secret'], 'v4',
+            'eu-central-1');
 
         $this->connector = new Connector($this->config);
+    }
+
+    public function getPresignedURL(string $path)
+    {
+        $this->connector->getAuthenticatedURL($this->global['aws']['bucket'], $path, 60 * 60);
     }
 
     public function multipartUpload($sourceFile)
