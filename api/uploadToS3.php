@@ -29,7 +29,7 @@ function uploadToS3(string $file)
     $filename_finished = $config['foldersAbs']['images'].DIRECTORY_SEPARATOR.$file;
 
     if (!$config['aws']['upload_files']) {
-        die('No upload desired');
+        return json_encode(['message' => 'No upload desired']);
     }
 
     if (!file_exists($filename_tmp)) {
