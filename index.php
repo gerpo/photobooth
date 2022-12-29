@@ -183,7 +183,7 @@ if (
         <?php if ($config['aws']['upload_files']): ?>
             <div id="s3DownloadCode" class="" style='display:flex; flex-direction: column; justify-content: center; position: fixed; bottom: 20px; right: 20px; background-color: white; color: black; border-radius: 5px'>
                 <img id="s3QRCodeImage" src='' alt='s3 download code' height='150px' width='150px'>
-                <span style='font-weight: bold; font-size: 2em; margin-top: 5px;text-align: center'>Download</span>
+                <span style='font-weight: bold; font-size: 2em;text-align: center'>Download</span>
             </div>
         <?php endif; ?>
     </div>
