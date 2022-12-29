@@ -46,9 +46,9 @@ class S3Upload
         $this->connector = new Connector($this->config);
     }
 
-    public function getPresignedURL(string $path)
+    public function getPresignedURL(string $path) : string
     {
-        $this->connector->getAuthenticatedURL($this->global['aws']['bucket'], $path, 60 * 60);
+        return $this->connector->getAuthenticatedURL($this->global['aws']['bucket'], $path, 60 * 60);
     }
 
     public function multipartUpload($sourceFile)
