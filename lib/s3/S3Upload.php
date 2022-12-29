@@ -2,7 +2,7 @@
 
 defined('AKEEBAENGINE') or define('AKEEBAENGINE', 1);
 
-require_once './../config.php';
+require_once __DIR__ . '/../config.php';
 
 foreach (glob("./**/*.php") as $filename) {
     require_once $filename;
