@@ -39,9 +39,9 @@ function frameAndText($resource, $rotation, $rbcc, $gbcc, $bbcc)
         $black, $fontPath, $text);
 
     // Add Text 2nd line
-    $fontPath = '../resources/fonts/ZenKakuGothicAntique-Regular.ttf';
+    $fontPath = '../resources/fonts/ZenKakuGothicAntique-Light.ttf';
     $text = "31.12.2022";
-    $fontSize = 48;
+    $fontSize = 32;
 
     list($left, $bottom, $right, , , $top) = imageftbbox($fontSize, 0, $fontPath, $text);
     $xOffsetLine2 = ($right - $left) / 2;
