@@ -195,10 +195,10 @@ if (!file_exists($filename_print)) {
 
     $borderImageWidth = $width * 1.04;
     $borderImageHeight = $height * 1.04;
-    $borderColor = imagecolorallocate($newimage, 255, 255, 255);
 
     $borderImage = imagecreatetruecolor($borderImageWidth, $borderImageHeight);
-    imagefilledrectangle($newimage,0,0,$borderImageWidth,$borderImageHeight,$borderColor);
+    $borderColor = imagecolorallocate($borderImage, 255, 255, 255);
+    imagefilledrectangle($borderImage,0,0,$borderImageWidth,$borderImageHeight,$borderColor);
 
     #imagecopyresized($borderImage, $source, ($borderImageWidth-$width)/2, ($borderImageHeight-$height) / 2, 0, 0, $borderImageWidth, $borderImageHeight, $width, $height);
     imagecopy($borderImage, $source, ($borderImageWidth-$width)/2, ($borderImageHeight-$height) / 2, 0, 0, $width, $height);
