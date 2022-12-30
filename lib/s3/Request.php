@@ -393,6 +393,7 @@ class Request
 		// Basic setup
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_USERAGENT, 'AkeebaBackupProfessional/S3PostProcessor');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 60*5);
 
 		if ($this->configuration->isSSL())
 		{
