@@ -211,6 +211,7 @@ if (!file_exists($filename_print)) {
 $cmd = sprintf($config['print']['cmd'], $filename_print);
 $cmd .= ' 2>&1'; //Redirect stderr to stdout, otherwise error messages get lost.
 
+exec('cupsenable Canon_CP1000', $outputPrinterEnable);
 exec($cmd, $output, $returnValue);
 
 $LogData = [
@@ -218,6 +219,7 @@ $LogData = [
     'msg' => $cmd,
     'returnValue' => $returnValue,
     'output' => $output,
+    'PrinterEnable' => $outputPrinterEnable,
     'php' => basename($_SERVER['PHP_SELF']),
 ];
 $LogString = json_encode($LogData);
