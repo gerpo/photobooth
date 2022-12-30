@@ -193,8 +193,18 @@ if (!file_exists($filename_print)) {
         $source = resizeCropImage($crop_width, $crop_height, $source);
     }
 
-    imagejpeg($source, $filename_print, $quality);
+    $borderImageWidth = $width * 1.04;
+    $borderImageHeight = $height * 1.04;
+    $borderColor = imagecolorallocate($newimage, 255, 255, 255);
+
+    $borderImage = imagecreatetruecolor($borderImageWidth, $borderImageHeight);
+    imagefilledrectangle($newimage,0,0,$borderImageWidth,$borderImageHeight,$borderColor);
+
+    #imagecopyresized($borderImage, $source, ($borderImageWidth-$width)/2, ($borderImageHeight-$height) / 2, 0, 0, $borderImageWidth, $borderImageHeight, $width, $height);
+    imagecopy($borderImage, $source, ($borderImageWidth-$width)/2, ($borderImageHeight-$height) / 2, 0, 0, $width, $height);
+    imagejpeg($borderImage, $filename_print, $quality);
     imagedestroy($source);
+    imagedestroy($borderImage);
 }
 
 // print image
