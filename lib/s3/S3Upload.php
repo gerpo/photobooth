@@ -54,7 +54,8 @@ class S3Upload
     public function multipartUpload($sourceFile, $suffix = '')
     {
         $input = Input::createFromFile($sourceFile);
-        $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], basename($sourceFile));
+        $basename = basename($sourceFile);
+        $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
 
         $eTags = array();
         $eTag = null;
@@ -65,7 +66,6 @@ class S3Upload
             $input = Input::createFromFile($sourceFile);
             $input->setUploadID($uploadId);
             $input->setPartNumber(++$partNumber);
-            $basename = basename($sourceFile);
             $eTag = $this->connector->uploadMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
 
             if (!is_null($eTag)) {
@@ -78,6 +78,6 @@ class S3Upload
         $input->setUploadID($uploadId);
         $input->setEtags($eTags);
 
-        $this->connector->finalizeMultipart($input, $this->global['aws']['bucket'], basename($sourceFile));
+        $this->connector->finalizeMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
     }
 }
