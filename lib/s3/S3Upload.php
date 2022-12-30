@@ -55,11 +55,6 @@ class S3Upload
     {
         $input = Input::createFromFile($sourceFile);
         $basename = basename($sourceFile);
-
-        $input = \Akeeba\Engine\Postproc\Connector\S3v4\Input::createFromFile($sourceFile);
-        $this->connector->putObject($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
-        return;
-
         $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
 
         $eTags = array();
