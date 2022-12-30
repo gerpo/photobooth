@@ -187,8 +187,8 @@ if (
             </div>
         <?php endif; ?>
 
-        <div style='position: fixed; bottom: 20px; left: 20px; color: white'>
-            <span style='font-weight: bold; font-size: 2em;'>Zum Drucken rote Taste drücken.</span>
+        <div style='position: fixed; bottom: 15px; left: 20px; color: white'>
+            <span style='font-weight: bold; font-size: 2em;'>Zum Drucken <span style='color: red'>rote</span> Taste drücken.</span>
         </div>
     </div>
 
