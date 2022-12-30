@@ -55,7 +55,9 @@ class S3Upload
     {
         $input = Input::createFromFile($sourceFile);
         $basename = basename($sourceFile);
-        $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
+        $headers = ['Content-Disposition ' => 'attachment '];
+        $uploadId = $this->connector->startMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}",
+            \Akeeba\Engine\Postproc\Connector\S3v4\Acl::ACL_PRIVATE, $headers);
 
         $eTags = array();
         $eTag = null;
@@ -66,7 +68,7 @@ class S3Upload
             $input = Input::createFromFile($sourceFile);
             $input->setUploadID($uploadId);
             $input->setPartNumber(++$partNumber);
-            $eTag = $this->connector->uploadMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}");
+            $eTag = $this->connector->uploadMultipart($input, $this->global['aws']['bucket'], "{$suffix}/{$basename}", $headers);
 
             if (!is_null($eTag)) {
                 $eTags[] = $eTag;
