@@ -186,6 +186,10 @@ if (
                 <span style='font-weight: bold; font-size: 2em;text-align: center'>Download</span>
             </div>
         <?php endif; ?>
+
+        <div style='position: fixed; bottom: 20px; right: 20px; color: white'>
+            <span style='font-weight: bold; font-size: 2em;'>Zum Drucken rote Taste drücken.</span>
+        </div>
     </div>
 
     <?php if ($config['gallery']['enabled']): ?>
